@@ -4,6 +4,7 @@ const authorText=document.querySelector("#author");
 const tweeterButton=document.querySelector("#tweeter");
 const newQuoteBtn=document.querySelector("#new-quot");
 let data=[];
+
 //show new quot
 const newQuote=()=>{
     let index= Math.floor(Math.random()* data.length);
@@ -18,7 +19,7 @@ const newQuote=()=>{
     }
 }
 //Get Quote from API
-async function getQuote(){
+async function getQuoteFromApi(){
    
     const apiUrl='https://type.fit/api/quotes';
     try{
@@ -26,7 +27,6 @@ async function getQuote(){
          data=await response.json();
         newQuote();
     }catch(error){
-        //getQuote();
         console.log('no quote',error);
     }
 }
@@ -41,4 +41,4 @@ const tweetQuote=()=>{
 newQuoteBtn.addEventListener('click',newQuote);
 tweeterButton.addEventListener('click',tweetQuote);
 //On Load
-getQuote()
+getQuoteFromApi();
