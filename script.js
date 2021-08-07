@@ -6,6 +6,8 @@ const tweeterButton=document.querySelector("#tweeter");
 const newQuoteBtn=document.querySelector("#new-quot");
 const readButton=document.querySelector("#readerButton");
 const audio=document.querySelector("#audioPlayer");
+const toggleSwitch=document.querySelector('input[type="checkbox"]');
+const lightIndicator=document.querySelector("#lightindicator");
 //Global Variables
 let data=[];
 
@@ -18,11 +20,12 @@ const newQuote=()=>{
     //check the quote size to determine styling
     if(data[index].text.length>50){
         quoteText.classList.add=".long-quot ";
+        
     }else{
         quoteText.classList.remove=".long-quot ";
     }
 }
-let response;
+
 // Text to speach 
 async function readThis(){
     const apiKey='764606a2bab4441982b1cba5989548ae'
@@ -63,9 +66,20 @@ const tweetQuote=()=>{
     window.open(tweeterUrl,'_blank');
 }
 
+// Dark mode
+const switchTheme=(event)=>{
+    if(event.target.checked){
+        document.documentElement.setAttribute('data-theme','dark');
+        lightIndicator.classList.replace('fa-sun','fa-moon');
+    }else{
+        document.documentElement.setAttribute('data-theme','light');
+        lightIndicator.classList.replace('fa-moon','fa-sun');
+    }
+}
 // Event Listeners
 newQuoteBtn.addEventListener('click',newQuote);
 tweeterButton.addEventListener('click',tweetQuote);
 readButton.addEventListener('click',readThis);
+toggleSwitch.addEventListener('change',switchTheme)
 //On Load
 getQuoteFromApi();
